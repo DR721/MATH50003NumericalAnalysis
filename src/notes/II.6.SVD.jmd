@@ -139,9 +139,10 @@ $$
 $$
 The inverse result follows since the inverse has SVD
 $$
-A^{-1} = V Σ^{-1} U^⋆ = V (W Σ^{-1} W) U^⋆
+A^{-1} = V Σ^{-1} U^⋆ = (V W) (W Σ^{-1} W) (W U)^⋆
 $$
-is the SVD of $A^{-1}$, where
+is the SVD of $A^{-1}$, i.e. $VW ∈ U(n)$ are the left singular vectors and
+$W U$ are the right singular vectors, where
 $$
 W := P_σ = \begin{bmatrix} && 1 \\ & ⋰ \\ 1 \end{bmatrix}
 $$
@@ -169,7 +170,7 @@ A_k := \begin{bmatrix} 𝐮_1 | ⋯ | 𝐮_k \end{bmatrix} \begin{bmatrix}
 σ_1 \\
 & ⋱ \\
 && σ_k\end{bmatrix} \begin{bmatrix} 𝐯_1 | ⋯ | 𝐯_k \end{bmatrix}^⋆
-$$ 
+$$
 is the best 2-norm approximation of $A$ by a rank $k$ matrix, that is, for all rank-$k$ matrices $B$, we have 
 $$\|A - A_k\|_2 ≤ \|A -B \|_2.$$
 
@@ -222,7 +223,7 @@ k = 20 # rank
 Σ_k = Diagonal(σ[1:k])
 U_k = U[:,1:k]
 V_k = V[:,1:k]
-norm(U_k * Σ_k * V_k' - H)
+opnorm(U_k * Σ_k * V_k' - H)
 ```
 
 Note that this can be viewed as a _compression_ algorithm: we have replaced a matrix with 
